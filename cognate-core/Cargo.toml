@@ -1,0 +1,18 @@
+[package]
+name = "cognate-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Core traits, types, and HTTP client abstractions for the Cognate LLM framework"
+repository = "https://github.com/cognate-rs/cognate"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+reqwest = { workspace = true }
+futures = { workspace = true }
+async-trait = { workspace = true }
+tracing = { workspace = true }

@@ -1,0 +1,21 @@
+[package]
+name = "cognate-rag"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Retrieval-Augmented Generation pipeline and vector store integrations for Cognate"
+repository = "https://github.com/cognate-rs/cognate"
+
+[dependencies]
+cognate-core = { path = "../cognate-core" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+cognate-providers = { path = "../cognate-providers" }
+
+[[example]]
+name = "rag_pipeline"

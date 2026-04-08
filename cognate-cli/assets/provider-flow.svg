@@ -1,0 +1,110 @@
+<svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .node { fill: #F8F9FA; stroke: #2C3E50; stroke-width: 2; }
+      .decision { fill: #FFF3E0; stroke: #F57C00; stroke-width: 2; }
+      .endpoint { fill: #E8F5E9; stroke: #2E7D32; stroke-width: 2; }
+      .error { fill: #FFEBEE; stroke: #C62828; stroke-width: 2; }
+      .label { font-family: Arial, sans-serif; font-size: 13px; fill: #333; font-weight: 500; }
+      .arrow { stroke: #555; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #1C1C1C; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#555" />
+    </marker>
+  </defs>
+
+  <text x="500" y="25" class="title" text-anchor="middle">Provider Selection and Request Flow</text>
+
+  <!-- Start -->
+  <circle cx="500" cy="60" r="25" class="node"/>
+  <text x="500" y="65" class="label" text-anchor="middle">Start</text>
+
+  <!-- Arrow down -->
+  <path class="arrow" d="M 500 85 L 500 120"/>
+
+  <!-- User creates request -->
+  <rect x="400" y="120" width="200" height="60" rx="5" class="node"/>
+  <text x="500" y="138" class="label" text-anchor="middle">Create Request</text>
+  <text x="500" y="158" class="label" text-anchor="middle">.with_model("gpt-4o")</text>
+  <text x="500" y="173" class="label" text-anchor="middle">.with_messages(...)</text>
+
+  <!-- Arrow down -->
+  <path class="arrow" d="M 500 180 L 500 220"/>
+
+  <!-- Provider selection decision -->
+  <polygon points="500,220 600,270 500,320 400,270" class="decision"/>
+  <text x="500" y="275" class="label" text-anchor="middle">Which Provider?</text>
+
+  <!-- OpenAI branch -->
+  <path class="arrow" d="M 600 270 L 700 270"/>
+  <rect x="700" y="240" width="120" height="60" rx="5" class="node"/>
+  <text x="760" y="258" class="label" text-anchor="middle">OpenAI</text>
+  <text x="760" y="278" class="label" text-anchor="middle">Provider</text>
+
+  <!-- Anthropic branch -->
+  <path class="arrow" d="M 500 320 L 500 380"/>
+  <rect x="400" y="380" width="200" height="60" rx="5" class="node"/>
+  <text x="500" y="398" class="label" text-anchor="middle">Anthropic</text>
+  <text x="500" y="418" class="label" text-anchor="middle">Provider</text>
+
+  <!-- Fallback branch -->
+  <path class="arrow" d="M 400 270 L 300 270"/>
+  <rect x="150" y="240" width="120" height="60" rx="5" class="node"/>
+  <text x="210" y="258" class="label" text-anchor="middle">Fallback</text>
+  <text x="210" y="278" class="label" text-anchor="middle">Provider</text>
+
+  <!-- OpenAI processing -->
+  <path class="arrow" d="M 760 300 L 760 360"/>
+  <rect x="680" y="360" width="160" height="80" rx="5" class="node"/>
+  <text x="760" y="378" class="label" text-anchor="middle">Apply Middleware</text>
+  <text x="760" y="398" class="label" text-anchor="middle">- Retry policy</text>
+  <text x="760" y="418" class="label" text-anchor="middle">- Rate limit</text>
+  <text x="760" y="433" class="label" text-anchor="middle">- Timeout</text>
+
+  <!-- Anthropic processing -->
+  <path class="arrow" d="M 500 440 L 500 500"/>
+  <rect x="400" y="500" width="200" height="80" rx="5" class="node"/>
+  <text x="500" y="518" class="label" text-anchor="middle">Apply Middleware</text>
+  <text x="500" y="538" class="label" text-anchor="middle">- Retry policy</text>
+  <text x="500" y="558" class="label" text-anchor="middle">- Rate limit</text>
+
+  <!-- Fallback processing -->
+  <path class="arrow" d="M 210 300 L 210 360"/>
+  <rect x="130" y="360" width="160" height="80" rx="5" class="node"/>
+  <text x="210" y="378" class="label" text-anchor="middle">Try Primary</text>
+  <text x="210" y="398" class="label" text-anchor="middle">(OpenAI)</text>
+  <text x="210" y="418" class="label" text-anchor="middle">On error, use</text>
+  <text x="210" y="433" class="label" text-anchor="middle">Secondary</text>
+
+  <!-- Execution paths converge -->
+  <path class="arrow" d="M 760 440 L 700 480"/>
+  <path class="arrow" d="M 500 580 L 600 580"/>
+  <path class="arrow" d="M 210 440 L 300 480"/>
+
+  <!-- Decision: Stream or Complete? -->
+  <polygon points="600,480 700,530 600,580 500,530" class="decision"/>
+  <text x="600" y="532" class="label" text-anchor="middle">Mode?</text>
+
+  <!-- Complete branch -->
+  <path class="arrow" d="M 700 530 L 800 530"/>
+  <rect x="800" y="500" width="120" height="60" rx="5" class="endpoint"/>
+  <text x="860" y="523" class="label" text-anchor="middle">Complete()</text>
+  <text x="860" y="543" class="label" text-anchor="middle">Return Response</text>
+
+  <!-- Stream branch -->
+  <path class="arrow" d="M 600 580 L 600 620"/>
+
+  <!-- Legend -->
+  <rect x="50" y="50" width="20" height="20" class="node"/>
+  <text x="80" y="65" class="label">Standard Step</text>
+
+  <polygon points="65,90 75,80 85,90 75,100" class="decision"/>
+  <text x="80" y="100" class="label">Decision Point</text>
+
+  <rect x="50" y="120" width="20" height="20" class="endpoint"/>
+  <text x="80" y="135" class="label">Result</text>
+
+  <rect x="50" y="160" width="20" height="20" class="error"/>
+  <text x="80" y="175" class="label">Error/Exception</text>
+</svg>

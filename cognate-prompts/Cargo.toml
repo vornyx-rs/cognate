@@ -1,0 +1,18 @@
+[package]
+name = "cognate-prompts"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Type-safe prompt templating with compile-time validation for Cognate"
+repository = "https://github.com/cognate-rs/cognate"
+
+[dependencies]
+cognate-core = { path = "../cognate-core" }
+cognate-prompts-derive = { path = "../cognate-prompts-derive" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+handlebars = { workspace = true }
+
+[[example]]
+name = "prompt_usage"

@@ -1,0 +1,27 @@
+[package]
+name = "cognate-axum"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Axum web framework integration for Cognate LLM providers"
+repository = "https://github.com/cognate-rs/cognate"
+
+[dependencies]
+cognate-core = { path = "../cognate-core" }
+axum = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+futures = { workspace = true }
+tower = { workspace = true }
+async-trait = { workspace = true }
+tokio-stream = { workspace = true }
+
+[dev-dependencies]
+cognate-providers = { path = "../cognate-providers" }
+tracing-subscriber = "0.3"
+futures = { workspace = true }
+
+[[example]]
+name = "chatgpt_clone"

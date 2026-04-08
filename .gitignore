@@ -1,0 +1,31 @@
+# Rust build artifacts
+/target/
+Cargo.lock
+**/*.rs.bk
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+.secrets/
+*.key
+*.pem
+
+# Dependencies
+node_modules/
+
+# Generated files
+*.o
+*.so
+*.dylib

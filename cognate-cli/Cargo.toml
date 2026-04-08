@@ -1,0 +1,13 @@
+[package]
+name = "cognate-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "CLI tool for interacting with LLM providers via Cognate"
+repository = "https://github.com/cognate-rs/cognate"
+
+[dependencies]
+cognate-core = { path = "../cognate-core" }
+cognate-providers = { path = "../cognate-providers" }
+tokio = { workspace = true }

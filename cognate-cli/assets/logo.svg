@@ -1,0 +1,72 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define gradients -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CE422B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A0241E;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1F7A8D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2CA9B8;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="white" stroke="#E5E5E5" stroke-width="1"/>
+
+  <!-- Main gear-like symbol representing type-safe system -->
+  <!-- Center hexagon (represents core/foundation) -->
+  <g filter="url(#shadow)">
+    <path d="M 100 60 L 135 80 L 135 120 L 100 140 L 65 120 L 65 80 Z" 
+          fill="url(#logoGradient)" stroke="none"/>
+    
+    <!-- Inner lock symbol (type-safety) -->
+    <g transform="translate(100, 100)">
+      <!-- Lock body -->
+      <rect x="-12" y="-8" width="24" height="18" rx="3" fill="white" opacity="0.9"/>
+      <!-- Lock shackle -->
+      <path d="M -8 -8 Q -8 -18 0 -18 Q 8 -18 8 -8" 
+            fill="none" stroke="white" stroke-width="2" opacity="0.9" stroke-linecap="round"/>
+      <!-- Lock dot -->
+      <circle cx="0" cy="2" r="2" fill="white" opacity="0.9"/>
+    </g>
+  </g>
+
+  <!-- Surrounding nodes (representing multi-provider architecture) -->
+  <!-- Top node -->
+  <g filter="url(#shadow)">
+    <circle cx="100" cy="35" r="12" fill="url(#accentGradient)" stroke="white" stroke-width="1.5"/>
+    <line x1="100" y1="47" x2="100" y2="60" stroke="url(#accentGradient)" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- Right node -->
+  <g filter="url(#shadow)">
+    <circle cx="155" cy="70" r="12" fill="url(#accentGradient)" stroke="white" stroke-width="1.5"/>
+    <line x1="143" y1="80" x2="133" y2="88" stroke="url(#accentGradient)" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- Right-bottom node -->
+  <g filter="url(#shadow)">
+    <circle cx="140" cy="140" r="12" fill="url(#accentGradient)" stroke="white" stroke-width="1.5"/>
+    <line x1="128" y1="128" x2="120" y2="120" stroke="url(#accentGradient)" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- Left-bottom node -->
+  <g filter="url(#shadow)">
+    <circle cx="60" cy="140" r="12" fill="url(#accentGradient)" stroke="white" stroke-width="1.5"/>
+    <line x1="72" y1="128" x2="80" y2="120" stroke="url(#accentGradient)" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- Left node -->
+  <g filter="url(#shadow)">
+    <circle cx="45" cy="70" r="12" fill="url(#accentGradient)" stroke="white" stroke-width="1.5"/>
+    <line x1="57" y1="80" x2="67" y2="88" stroke="url(#accentGradient)" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- Top-left connecting lines for visual cohesion -->
+  <line x1="92" y1="65" x2="87" y2="45" stroke="url(#accentGradient)" stroke-width="1.5" opacity="0.3"/>
+  <line x1="108" y1="65" x2="112" y2="47" stroke="url(#accentGradient)" stroke-width="1.5" opacity="0.3"/>
+</svg>

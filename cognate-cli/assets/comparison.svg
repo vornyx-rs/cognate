@@ -1,0 +1,107 @@
+<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .header { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: white; }
+      .cell-yes { fill: #E8F5E9; }
+      .cell-no { fill: #FFEBEE; }
+      .cell-partial { fill: #FFF3E0; }
+      .cell-text { font-family: Arial, sans-serif; font-size: 13px; fill: #333; }
+      .border { stroke: #BDBDBD; stroke-width: 1; }
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #1C1C1C; }
+      .feature-label { font-family: Arial, sans-serif; font-size: 13px; fill: #333; font-weight: 500; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="30" class="title" text-anchor="middle">Feature Comparison</text>
+
+  <!-- Column headers -->
+  <!-- Cognate -->
+  <rect x="50" y="50" width="350" height="50" fill="#CE422B" class="border"/>
+  <text x="225" y="85" class="header" text-anchor="middle">Cognate</text>
+
+  <!-- async-openai -->
+  <rect x="420" y="50" width="350" height="50" fill="#666" class="border"/>
+  <text x="595" y="85" class="header" text-anchor="middle">async-openai</text>
+
+  <!-- rig -->
+  <rect x="790" y="50" width="350" height="50" fill="#9C9C9C" class="border"/>
+  <text x="965" y="85" class="header" text-anchor="middle">rig</text>
+
+  <!-- Features row by row -->
+  <!-- Feature: Multi-provider -->
+  <rect x="50" y="110" width="350" height="50" class="cell-yes border"/>
+  <text x="70" y="120" class="feature-label">Multi-provider</text>
+  <text x="70" y="140" class="cell-text">OpenAI, Anthropic, Groq, Ollama</text>
+
+  <rect x="420" y="110" width="350" height="50" class="cell-no border"/>
+  <text x="440" y="140" class="cell-text">OpenAI only</text>
+
+  <rect x="790" y="110" width="350" height="50" class="cell-partial border"/>
+  <text x="810" y="140" class="cell-text">Partial: OpenAI, Anthropic</text>
+
+  <!-- Feature: Type-safe tools -->
+  <rect x="50" y="170" width="350" height="50" class="cell-yes border"/>
+  <text x="70" y="180" class="feature-label">Type-safe tools</text>
+  <text x="70" y="200" class="cell-text">#[derive(Tool)] with compile-time validation</text>
+
+  <rect x="420" y="170" width="350" height="50" class="cell-no border"/>
+  <text x="440" y="200" class="cell-text">Manual JSON serialization</text>
+
+  <rect x="790" y="170" width="350" height="50" class="cell-partial border"/>
+  <text x="810" y="200" class="cell-text">Partial: Runtime definition</text>
+
+  <!-- Feature: Compile-time prompts -->
+  <rect x="50" y="230" width="350" height="50" class="cell-yes border"/>
+  <text x="70" y="240" class="feature-label">Compile-time validation</text>
+  <text x="70" y="260" class="cell-text">Prompt template variables checked at build time</text>
+
+  <rect x="420" y="230" width="350" height="50" class="cell-no border"/>
+  <text x="440" y="260" class="cell-text">Runtime string interpolation</text>
+
+  <rect x="790" y="230" width="350" height="50" class="cell-no border"/>
+  <text x="810" y="260" class="cell-text">Runtime templates</text>
+
+  <!-- Feature: Axum integration -->
+  <rect x="50" y="290" width="350" height="50" class="cell-yes border"/>
+  <text x="70" y="300" class="feature-label">Axum integration</text>
+  <text x="70" y="320" class="cell-text">Extractors and middleware included</text>
+
+  <rect x="420" y="290" width="350" height="50" class="cell-no border"/>
+  <text x="440" y="320" class="cell-text">Not included</text>
+
+  <rect x="790" y="290" width="350" height="50" class="cell-no border"/>
+  <text x="810" y="320" class="cell-text">Not included</text>
+
+  <!-- Feature: Middleware system -->
+  <rect x="50" y="350" width="350" height="50" class="cell-yes border"/>
+  <text x="70" y="360" class="feature-label">Middleware system</text>
+  <text x="70" y="380" class="cell-text">Retry, rate-limit, tracing, observability</text>
+
+  <rect x="420" y="350" width="350" height="50" class="cell-partial border"/>
+  <text x="440" y="380" class="cell-text">Basic retry support only</text>
+
+  <rect x="790" y="350" width="350" height="50" class="cell-partial border"/>
+  <text x="810" y="380" class="cell-text">Limited middleware</text>
+
+  <!-- Feature: RAG support -->
+  <rect x="50" y="410" width="350" height="50" class="cell-yes border"/>
+  <text x="70" y="420" class="feature-label">RAG pipeline</text>
+  <text x="70" y="440" class="cell-text">Memory traits, vector search abstraction</text>
+
+  <rect x="420" y="410" width="350" height="50" class="cell-no border"/>
+  <text x="440" y="440" class="cell-text">Not included</text>
+
+  <rect x="790" y="410" width="350" height="50" class="cell-no border"/>
+  <text x="810" y="440" class="cell-text">Not included</text>
+
+  <!-- Legend -->
+  <rect x="50" y="480" width="20" height="20" class="cell-yes border"/>
+  <text x="80" y="495" class="cell-text">Fully supported</text>
+
+  <rect x="300" y="480" width="20" height="20" class="cell-partial border"/>
+  <text x="330" y="495" class="cell-text">Partial support</text>
+
+  <rect x="550" y="480" width="20" height="20" class="cell-no border"/>
+  <text x="580" y="495" class="cell-text">Not supported</text>
+</svg>

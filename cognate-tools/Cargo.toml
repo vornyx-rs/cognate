@@ -1,0 +1,28 @@
+[package]
+name = "cognate-tools"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Type-safe tool calling and function execution for Cognate LLM applications"
+repository = "https://github.com/cognate-rs/cognate"
+
+[dependencies]
+cognate-core = { path = "../cognate-core" }
+cognate-tools-derive = { path = "../cognate-tools-derive" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+async-trait = { workspace = true }
+schemars = { workspace = true }
+futures = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+cognate-providers = { path = "../cognate-providers" }
+schemars = { workspace = true }
+
+[[example]]
+name = "tool_usage"
+
+[[example]]
+name = "agent"

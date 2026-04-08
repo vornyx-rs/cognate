@@ -1,0 +1,38 @@
+[workspace]
+members = [
+    "cognate-core",
+    "cognate-providers",
+    "cognate-tools",
+    "cognate-prompts",
+    "cognate-rag",
+    "cognate-axum",
+    "cognate-cli",
+    "cognate-tools-derive",
+    "cognate-prompts-derive"
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+rust-version = "1.70"
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+async-trait = "0.1"
+thiserror = "2.0"
+reqwest = { version = "0.12", features = ["json", "stream"] }
+futures = "0.3"
+tracing = "0.1"
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "2.0", features = ["full", "derive"] }
+bytes = "1.0"
+schemars = "0.8"
+handlebars = "6.0"
+axum = "0.8"
+tower = "0.5"
+tokio-stream = "0.1"

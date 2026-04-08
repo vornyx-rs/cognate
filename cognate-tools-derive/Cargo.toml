@@ -1,0 +1,17 @@
+[package]
+name = "cognate-tools-derive"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Procedural macros for type-safe tool definitions in Cognate"
+repository = "https://github.com/cognate-rs/cognate"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = { workspace = true }
+quote = { workspace = true }
+syn = { workspace = true }
+serde_json = { workspace = true }
