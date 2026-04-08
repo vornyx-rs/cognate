@@ -5,7 +5,8 @@ edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
 description = "Procedural macros for compile-time validated prompt templates in Cognate"
-repository = "https://github.com/cognate-rs/cognate"
+repository = "https://github.com/vornyx-rs/Cognate"
+readme = "../README.md"
 
 [lib]
 proc-macro = true
