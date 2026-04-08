@@ -27,39 +27,52 @@
 //! - `full` - All features
 
 pub use cognate_core::{
-    error, middleware, ratelimit, types, Client, Error, Layer, Message, MessageRole, Provider,
-    Request, Response, StreamProvider,
+    error, middleware, ratelimit, types, Error, Layer, Message, Provider, Request, Response,
 };
 
 pub use cognate_providers::{
-    anthropic, openai, retry, sse, AnthropicConfig, AnthropicProvider, FallbackProvider,
-    OpenAiConfig, OpenAiProvider, RetryConfig,
+    anthropic, openai, retry, sse, AnthropicProvider, FallbackProvider, OpenAiProvider,
+    RetryConfig,
 };
 
-pub use cognate_tools::{Tool, ToolExecutor, ToolResult};
-pub use cognate_tools_derive::Tool;
+pub use cognate_tools::{Tool, ToolExecutor};
+pub use cognate_tools_derive::Tool as DeriveToolMacro;
 
-pub use cognate_prompts::{Prompt, PromptRenderer};
-pub use cognate_prompts_derive::Prompt;
+pub use cognate_prompts::Prompt;
+pub use cognate_prompts_derive::Prompt as DerivePromptMacro;
 
 #[cfg(feature = "rag")]
 pub use cognate_rag::{Document, InMemoryVectorStore, VectorStore};
 
 #[cfg(feature = "axum")]
-pub use cognate_axum::{extract_response, StreamExt};
+pub use cognate_axum;
+
+// Re-export derive macros for convenience
+pub use cognate_tools_derive;
+pub use cognate_prompts_derive;
 
 /// Prelude module for convenient imports
 pub mod prelude {
-    pub use crate::{
-        Client, Error, Message, MessageRole, Provider, Request, Response, StreamProvider,
-    };
+    pub use crate::{Error, Layer, Message, Provider, Request, Response};
     pub use crate::{AnthropicProvider, FallbackProvider, OpenAiProvider, RetryConfig};
-    pub use crate::{Tool, ToolExecutor, ToolResult};
-    pub use crate::{Prompt, PromptRenderer};
+    pub use crate::{Tool, ToolExecutor};
 
     #[cfg(feature = "rag")]
     pub use crate::{Document, InMemoryVectorStore, VectorStore};
-
-    #[cfg(feature = "axum")]
-    pub use crate::{extract_response, StreamExt};
 }
+
+pub mod providers {
+    //! Provider implementations
+    pub use cognate_providers::*;
+}
+
+pub mod tools {
+    //! Tool calling and execution
+    pub use cognate_tools::*;
+}
+
+pub mod prompts {
+    //! Prompt templating
+    pub use cognate_prompts::*;
+}
+
