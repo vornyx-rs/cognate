@@ -5,7 +5,8 @@ edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
 description = "Core traits, types, and HTTP client abstractions for the Cognate LLM framework"
-repository = "https://github.com/cognate-rs/cognate"
+repository = "https://github.com/vornyx-rs/Cognate"
+readme = "../README.md"
 
 [dependencies]
 serde = { workspace = true }
