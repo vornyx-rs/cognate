@@ -1,0 +1,34 @@
+[package]
+name = "cognate"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "A modular, extensible LLM framework for Rust with multi-provider support, type-safe tools, and RAG capabilities"
+repository = "https://github.com/vornyx-rs/Cognate"
+readme = "../README.md"
+keywords = ["llm", "ai", "openai", "anthropic", "async"]
+categories = ["api-bindings", "asynchronous"]
+
+[dependencies]
+cognate-core = { path = "../cognate-core", version = "0.1" }
+cognate-providers = { path = "../cognate-providers", version = "0.1" }
+cognate-tools = { path = "../cognate-tools", version = "0.1" }
+cognate-tools-derive = { path = "../cognate-tools-derive", version = "0.1" }
+cognate-prompts = { path = "../cognate-prompts", version = "0.1" }
+cognate-prompts-derive = { path = "../cognate-prompts-derive", version = "0.1" }
+cognate-rag = { path = "../cognate-rag", version = "0.1", optional = true }
+cognate-axum = { path = "../cognate-axum", version = "0.1", optional = true }
+
+[features]
+default = ["providers", "tools", "prompts"]
+providers = []
+tools = []
+prompts = []
+rag = ["dep:cognate-rag"]
+axum = ["dep:cognate-axum"]
+full = ["rag", "axum"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

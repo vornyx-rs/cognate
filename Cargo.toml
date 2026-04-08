@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "cognate",
     "cognate-core",
     "cognate-providers",
     "cognate-tools",
