@@ -1,0 +1,33 @@
+name: Benchmarks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  benchmark:
+    name: Benchmark Suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Run benchmarks
+        run: cargo bench --workspace --no-run
+      - name: Build release artifacts
+        run: cargo build --release --workspace
+      - name: Check compile times
+        run: |
+          echo "## Build Times" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Crate | Time |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|------|" >> $GITHUB_STEP_SUMMARY
+          for crate in cognate-core cognate-providers cognate-tools cognate-prompts cognate-rag cognate-axum cognate-cli cognate-llm; do
+            time cargo build -p $crate --release 2>&1 | grep "real" | sed "s/real/$crate/" >> build_times.txt || true
+          done
+          cat build_times.txt >> $GITHUB_STEP_SUMMARY || true

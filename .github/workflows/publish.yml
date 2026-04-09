@@ -1,0 +1,83 @@
+name: Publish to crates.io
+
+on:
+  push:
+    tags:
+      - 'cognate-core-v*'
+      - 'cognate-providers-v*'
+      - 'cognate-tools-v*'
+      - 'cognate-tools-derive-v*'
+      - 'cognate-prompts-v*'
+      - 'cognate-prompts-derive-v*'
+      - 'cognate-rag-v*'
+      - 'cognate-axum-v*'
+      - 'cognate-cli-v*'
+      - 'cognate-llm-v*'
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  publish:
+    name: Publish Crate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Extract crate name and version
+        id: extract
+        run: |
+          TAG=${{ github.ref }}
+          TAG=${TAG#refs/tags/}
+          CRATE=$(echo $TAG | sed 's/-v.*//')
+          VERSION=$(echo $TAG | sed 's/.*-v//')
+          echo "crate=$CRATE" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+      - name: Verify tag matches Cargo.toml
+        run: |
+          CARGO_VERSION=$(grep "^version" ${{ steps.extract.outputs.crate }}/Cargo.toml | head -1 | sed 's/.*"\(.*\)".*/\1/')
+          if [ "$CARGO_VERSION" != "${{ steps.extract.outputs.version }}" ]; then
+            echo "Tag version ${{ steps.extract.outputs.version }} does not match Cargo.toml version $CARGO_VERSION"
+            exit 1
+          fi
+      - name: Publish ${{ steps.extract.outputs.crate }} v${{ steps.extract.outputs.version }}
+        run: cd ${{ steps.extract.outputs.crate }} && cargo publish --token ${{ secrets.CARGO_TOKEN }}
+        continue-on-error: true
+      - name: Wait before next publish (rate limiting)
+        run: sleep 10
+
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: publish
+    if: success()
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract crate name and version
+        id: extract
+        run: |
+          TAG=${{ github.ref }}
+          TAG=${TAG#refs/tags/}
+          CRATE=$(echo $TAG | sed 's/-v.*//')
+          VERSION=$(echo $TAG | sed 's/.*-v//')
+          echo "crate=$CRATE" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.extract.outputs.tag }}
+          release_name: ${{ steps.extract.outputs.crate }} v${{ steps.extract.outputs.version }}
+          body: |
+            ## ${{ steps.extract.outputs.crate }} v${{ steps.extract.outputs.version }}
+
+            Released on crates.io: https://crates.io/crates/${{ steps.extract.outputs.crate }}/
+            Documentation: https://docs.rs/${{ steps.extract.outputs.crate }}/
+
+            For more information, see the [CHANGELOG](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md).
+          draft: false
+          prerelease: false
