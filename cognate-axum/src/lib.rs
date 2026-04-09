@@ -158,7 +158,7 @@ impl UsageHandle {
 
 // ─── UsageLayer (Tower Layer) ──────────────────────────────────────────────
 
-/// Tower [`Layer`] that wraps a [`Provider`] and records token usage.
+/// Tower middleware layer that wraps a [`Provider`] and records token usage.
 ///
 /// # Example
 ///

@@ -7,11 +7,11 @@
 //! ## Quick Start
 //!
 //! For detailed documentation, examples, and guides, please visit:
-//! - **Main Crate**: https://crates.io/crates/cognate-llm
-//! - **Documentation**: https://docs.rs/cognate-llm/
-//! - **Repository**: https://github.com/vornyx-rs/cognate
-//! - **Examples**: See https://github.com/vornyx-rs/cognate/tree/main/cognate-providers/examples
-//! - **Getting Started**: https://github.com/vornyx-rs/cognate/blob/main/GETTING_STARTED.md
+//! - **Main Crate**: <https://crates.io/crates/cognate-llm>
+//! - **Documentation**: <https://docs.rs/cognate-llm/>
+//! - **Repository**: <https://github.com/vornyx-rs/cognate>
+//! - **Examples**: See <https://github.com/vornyx-rs/cognate/tree/main/cognate-providers/examples>
+//! - **Getting Started**: <https://github.com/vornyx-rs/cognate/blob/main/GETTING_STARTED.md>
 
 pub use cognate_core::{
     error, middleware, ratelimit, types, Error, Layer, Message, Provider, Request, Response,

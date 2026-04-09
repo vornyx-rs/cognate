@@ -7,7 +7,7 @@ use proc_macro2::Span;
 use quote::quote;
 use syn::{parse_macro_input, Data, DeriveInput, Fields, LitStr};
 
-/// Derive the [`cognate_prompts::Prompt`] trait for a struct.
+/// Derive the `cognate_prompts::Prompt` trait for a struct.
 ///
 /// # Attributes
 ///
