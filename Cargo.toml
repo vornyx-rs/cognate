@@ -33,7 +33,7 @@ quote = "1.0"
 syn = { version = "2.0", features = ["full", "derive"] }
 bytes = "1.0"
 schemars = "0.8"
-handlebars = "5.1"
+handlebars = "6.0"
 axum = "0.8"
 tower = "0.5"
 tokio-stream = "0.1"
