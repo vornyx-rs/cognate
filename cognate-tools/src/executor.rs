@@ -138,8 +138,8 @@ impl ToolExecutor {
             Error::InvalidRequest(format!("Unknown tool: '{}'", call.function.name))
         })?;
 
-        let args: serde_json::Value = serde_json::from_str(&call.function.arguments)
-            .map_err(|e| {
+        let args: serde_json::Value =
+            serde_json::from_str(&call.function.arguments).map_err(|e| {
                 Error::InvalidRequest(format!(
                     "Invalid arguments for tool '{}': {}",
                     call.function.name, e
@@ -255,11 +255,7 @@ mod tests {
     #[tokio::test]
     async fn test_tool_executor_unknown_tool_returns_error() {
         let provider = MockProvider::new();
-        provider.push_response(make_tool_call_response(
-            "call-2",
-            "nonexistent",
-            r#"{}"#,
-        ));
+        provider.push_response(make_tool_call_response("call-2", "nonexistent", r#"{}"#));
 
         let executor = ToolExecutor::new(provider);
         let req = Request::new().with_model("test");

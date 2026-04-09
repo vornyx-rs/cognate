@@ -22,7 +22,9 @@ struct UserAnalysis {
 
 /// Multi-line prompt with several variables.
 #[derive(Prompt, Serialize)]
-#[template("You are a {{role}} assistant.\nThe user asked: {{question}}\nPlease reply in {{language}}.")]
+#[template(
+    "You are a {{role}} assistant.\nThe user asked: {{question}}\nPlease reply in {{language}}."
+)]
 struct AssistantPrompt {
     role: String,
     question: String,

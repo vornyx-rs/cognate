@@ -1,4 +1,4 @@
-use cognate_core::{Provider, Request, Message};
+use cognate_core::{Message, Provider, Request};
 use cognate_providers::OpenAiProvider;
 use std::io::{self, Write};
 
@@ -6,10 +6,8 @@ use std::io::{self, Write};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let api_key = std::env::var("OPENAI_API_KEY").expect("OPENAI_API_KEY not set");
     let provider = OpenAiProvider::new(api_key)?;
-    
-    let mut messages = vec![
-        Message::system("You are a helpful CLI assistant."),
-    ];
+
+    let mut messages = vec![Message::system("You are a helpful CLI assistant.")];
 
     println!("Welcome to Cognate CLI! (Type 'exit' to quit)");
 
@@ -26,7 +24,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         messages.push(Message::user(input));
-        
+
         let req = Request::new()
             .with_model("gpt-3.5-turbo")
             .with_messages(messages.clone());
@@ -34,7 +32,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("Thinking...");
         let resp = provider.complete(req).await?;
         let content = resp.content();
-        
+
         println!("Assistant: {}", content);
         messages.push(Message::assistant(content));
     }

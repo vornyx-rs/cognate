@@ -87,16 +87,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         city: String::new(),
     });
 
-    let request = Request::new()
-        .with_model("gpt-4o-mini")
-        .with_messages(vec![
-            Message::system(
-                "You are a helpful assistant with access to a calculator and weather service.",
-            ),
-            Message::user(
-                "What is 123 multiplied by 456? Also, what is the weather in Tokyo?",
-            ),
-        ]);
+    let request = Request::new().with_model("gpt-4o-mini").with_messages(vec![
+        Message::system(
+            "You are a helpful assistant with access to a calculator and weather service.",
+        ),
+        Message::user("What is 123 multiplied by 456? Also, what is the weather in Tokyo?"),
+    ]);
 
     println!("Running agent …\n");
     let response = executor.execute(request).await?;

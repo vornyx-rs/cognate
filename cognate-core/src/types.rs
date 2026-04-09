@@ -4,6 +4,6 @@
 //! exists so consumers can write `use cognate_core::types::*` if they prefer.
 
 pub use crate::{
-    Chunk, Choice, Delta, EmbeddingProvider, Message, ProviderConfig, Request, Response, Role,
+    Choice, Chunk, Delta, EmbeddingProvider, Message, ProviderConfig, Request, Response, Role,
     ToolCall, ToolCallFunction, Usage,
 };

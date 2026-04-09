@@ -3,9 +3,9 @@
 //! Provides utilities for retrying failed LLM provider requests
 //! with customizable backoff strategies.
 
-use std::time::Duration;
 use cognate_core::{Error, Result};
 use futures::Future;
+use std::time::Duration;
 
 /// Configuration for exponential-backoff retry logic.
 #[derive(Debug, Clone)]
@@ -44,15 +44,13 @@ where
         match f().await {
             Ok(res) => return Ok(res),
             Err(e) if e.is_retryable() && i < config.max_retries => {
-                let actual_delay = e.retry_after()
-                    .map(Duration::from_secs)
-                    .unwrap_or(delay);
+                let actual_delay = e.retry_after().map(Duration::from_secs).unwrap_or(delay);
 
                 tokio::time::sleep(actual_delay).await;
 
                 // Update delay for next iteration (exponential backoff)
                 delay = Duration::from_secs_f64(
-                    (delay.as_secs_f64() * config.factor).min(config.max_delay.as_secs_f64())
+                    (delay.as_secs_f64() * config.factor).min(config.max_delay.as_secs_f64()),
                 );
                 last_error = Some(e);
             }
@@ -84,7 +82,8 @@ mod tests {
                     Ok("success")
                 }
             }
-        }).await;
+        })
+        .await;
 
         assert_eq!(result.unwrap(), "success");
         assert_eq!(counter.load(Ordering::SeqCst), 3);
@@ -93,8 +92,8 @@ mod tests {
     #[tokio::test]
     async fn test_retry_failure() {
         let config = RetryConfig {
-             max_retries: 2,
-             ..Default::default()
+            max_retries: 2,
+            ..Default::default()
         };
         let counter = Arc::new(AtomicU32::new(0));
 
@@ -104,7 +103,8 @@ mod tests {
                 counter.fetch_add(1, Ordering::SeqCst);
                 Err(Error::Timeout(1))
             }
-        }).await;
+        })
+        .await;
 
         assert!(result.is_err());
         assert_eq!(counter.load(Ordering::SeqCst), 3);

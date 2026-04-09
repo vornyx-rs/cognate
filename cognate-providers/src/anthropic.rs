@@ -4,7 +4,7 @@
 
 use async_trait::async_trait;
 use cognate_core::{
-    Chunk, Choice, Delta, Message, Provider, ProviderConfig, Request, Response, Role, ToolCall,
+    Choice, Chunk, Delta, Message, Provider, ProviderConfig, Request, Response, Role, ToolCall,
     ToolCallFunction,
 };
 use futures::stream::{BoxStream, StreamExt, TryStreamExt};
@@ -96,7 +96,10 @@ impl AnthropicProvider {
         if status == 429 {
             cognate_core::Error::RateLimit { retry_after: 60 }
         } else {
-            cognate_core::Error::Api { status, message: body }
+            cognate_core::Error::Api {
+                status,
+                message: body,
+            }
         }
     }
 
@@ -141,7 +144,10 @@ impl Provider for AnthropicProvider {
         .await
     }
 
-    async fn stream(&self, req: Request) -> cognate_core::Result<BoxStream<'static, cognate_core::Result<Chunk>>> {
+    async fn stream(
+        &self,
+        req: Request,
+    ) -> cognate_core::Result<BoxStream<'static, cognate_core::Result<Chunk>>> {
         with_retry(&self.retry_config, || async {
             if let Some(ref limiter) = self.rate_limiter {
                 limiter.acquire(1.0).await;
@@ -241,25 +247,28 @@ impl AnthropicRequest {
             .collect();
 
         // Convert OpenAI-format tool definitions to Anthropic format.
-        let tools = req.extra.get("tools").and_then(|v| v.as_array()).map(|arr| {
-            arr.iter()
-                .filter_map(|t| {
-                    let func = t.get("function")?;
-                    Some(AnthropicTool {
-                        name: func.get("name")?.as_str()?.to_string(),
-                        description: func
-                            .get("description")
-                            .and_then(|d| d.as_str())
-                            .unwrap_or("")
-                            .to_string(),
-                        input_schema: func
-                            .get("parameters")
-                            .cloned()
-                            .unwrap_or_else(|| serde_json::json!({"type":"object","properties":{}})),
+        let tools = req
+            .extra
+            .get("tools")
+            .and_then(|v| v.as_array())
+            .map(|arr| {
+                arr.iter()
+                    .filter_map(|t| {
+                        let func = t.get("function")?;
+                        Some(AnthropicTool {
+                            name: func.get("name")?.as_str()?.to_string(),
+                            description: func
+                                .get("description")
+                                .and_then(|d| d.as_str())
+                                .unwrap_or("")
+                                .to_string(),
+                            input_schema: func.get("parameters").cloned().unwrap_or_else(
+                                || serde_json::json!({"type":"object","properties":{}}),
+                            ),
+                        })
                     })
-                })
-                .collect::<Vec<_>>()
-        });
+                    .collect::<Vec<_>>()
+            });
 
         Self {
             model: req.model.clone(),

@@ -72,7 +72,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ### Basic Chat
 
-```rust
+```rust,no_run
 use cognate_core::{Provider, Request, Message};
 use cognate_providers::OpenAiProvider;
 
@@ -97,7 +97,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### Type-Safe Tool Calling
 
-```rust
+```rust,no_run
 use cognate_tools::Tool;
 use cognate_core::{Provider, Request, Message};
 use serde::{Deserialize, Serialize};
@@ -129,7 +129,7 @@ let request = Request::new()
 
 ### Streaming Responses
 
-```rust
+```rust,no_run
 use cognate_core::Provider;
 use futures::StreamExt;
 
@@ -178,7 +178,7 @@ cargo run --example simple_chat -p cognate-providers
 
 ### OpenAI Provider
 
-```rust
+```rust,no_run
 use cognate_providers::{OpenAiProvider, RetryConfig};
 use std::time::Duration;
 
@@ -195,7 +195,7 @@ let provider = OpenAiProvider::new(api_key)?
 
 Implement the `Provider` trait:
 
-```rust
+```rust,no_run
 use cognate_core::{Provider, Request, Response};
 use async_trait::async_trait;
 
@@ -216,7 +216,7 @@ impl Provider for MyProvider {
 
 Cognate integrates with standard Rust tracing:
 
-```rust
+```rust,no_run
 use tracing::{info, span, Level};
 
 let span = span!(Level::INFO, "llm_request", model = "gpt-4o");
@@ -229,7 +229,7 @@ let response = provider.complete(request).await?;
 
 Comprehensive error types:
 
-```rust
+```rust,no_run
 use cognate_core::{Error, Result};
 
 match provider.complete(request).await {
@@ -245,7 +245,7 @@ match provider.complete(request).await {
 
 Cognate includes a mock provider for testing:
 
-```rust
+```rust,no_run
 use cognate_core::MockProvider;
 
 let mock = MockProvider::new()

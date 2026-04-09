@@ -147,11 +147,7 @@ impl<E: EmbeddingProvider, V: VectorStore> RagPipeline<E, V> {
     /// # Errors
     ///
     /// Returns [`Error::VectorStore`] if embedding or search fails.
-    pub async fn retrieve(
-        &self,
-        query: &str,
-        limit: usize,
-    ) -> cognate_core::Result<Vec<Document>> {
+    pub async fn retrieve(&self, query: &str, limit: usize) -> cognate_core::Result<Vec<Document>> {
         let mut embeddings = self
             .embedder
             .embed(vec![query.to_string()])

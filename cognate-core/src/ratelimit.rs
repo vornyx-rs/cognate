@@ -4,8 +4,8 @@
 //! LLM provider requests.
 
 use std::sync::Arc;
-use tokio::sync::Mutex;
 use std::time::{Duration, Instant};
+use tokio::sync::Mutex;
 
 /// A token bucket rate limiter
 #[derive(Debug, Clone)]
@@ -66,7 +66,7 @@ impl TokenBucket {
 
             let tokens_needed = amount - state.tokens;
             let wait_time = Duration::from_secs_f64(tokens_needed / state.fill_rate);
-            
+
             // Drop lock before sleeping
             drop(state);
             tokio::time::sleep(wait_time).await;
@@ -78,7 +78,7 @@ impl BucketState {
     fn refill(&mut self) {
         let now = Instant::now();
         let elapsed = now.duration_since(self.last_refill).as_secs_f64();
-        
+
         self.tokens = (self.tokens + elapsed * self.fill_rate).min(self.capacity);
         self.last_refill = now;
     }
@@ -92,16 +92,16 @@ mod tests {
     #[tokio::test]
     async fn test_token_bucket() {
         let bucket = TokenBucket::new(10.0, 1.0);
-        
+
         // Should be able to acquire 5 tokens immediately
         assert!(bucket.try_acquire(5.0).await);
-        
+
         // Should be able to acquire another 5 tokens immediately
         assert!(bucket.try_acquire(5.0).await);
-        
+
         // Should fail to acquire more tokens
         assert!(!bucket.try_acquire(1.0).await);
-        
+
         // Wait for 1.1s to get 1 token
         tokio::time::sleep(Duration::from_millis(1100)).await;
         assert!(bucket.try_acquire(1.0).await);

@@ -60,13 +60,17 @@ async fn chat_handler(
         Ok(stream) => into_sse(stream),
         Err(e) => {
             // Return an SSE stream that immediately emits a single error event.
-            let error_stream =
-                futures::stream::once(async move { Ok::<_, cognate_core::Error>(cognate_core::Chunk {
+            let error_stream = futures::stream::once(async move {
+                Ok::<_, cognate_core::Error>(cognate_core::Chunk {
                     id: "err".to_string(),
                     model: String::new(),
-                    delta: cognate_core::Delta { role: None, content: e.to_string() },
+                    delta: cognate_core::Delta {
+                        role: None,
+                        content: e.to_string(),
+                    },
                     finish_reason: Some("error".to_string()),
-                }) });
+                })
+            });
             into_sse(Box::pin(error_stream))
         }
     }

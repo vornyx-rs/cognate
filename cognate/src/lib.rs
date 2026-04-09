@@ -1,4 +1,3 @@
-#![doc = include_str!("../README.md")]
 #![warn(missing_docs)]
 
 //! # Cognate
@@ -7,32 +6,19 @@
 //!
 //! ## Quick Start
 //!
-//! ```rust,no_run
-//! use cognate::prelude::*;
-//!
-//! #[tokio::main]
-//! async fn main() {
-//!     let client = cognate::providers::OpenAiProvider::new("sk-...".to_string());
-//!     // Use the client...
-//! }
-//! ```
-//!
-//! ## Features
-//!
-//! - `providers` - OpenAI and Anthropic provider support (default)
-//! - `tools` - Type-safe tool calling with derive macros (default)
-//! - `prompts` - Compile-time validated prompt templates (default)
-//! - `rag` - Retrieval-Augmented Generation support
-//! - `axum` - Axum web framework integration
-//! - `full` - All features
+//! For detailed documentation, examples, and guides, please visit:
+//! - **Main Crate**: https://crates.io/crates/cognate-llm
+//! - **Documentation**: https://docs.rs/cognate-llm/
+//! - **Repository**: https://github.com/vornyx-rs/cognate
+//! - **Examples**: See https://github.com/vornyx-rs/cognate/tree/main/cognate-providers/examples
+//! - **Getting Started**: https://github.com/vornyx-rs/cognate/blob/main/GETTING_STARTED.md
 
 pub use cognate_core::{
     error, middleware, ratelimit, types, Error, Layer, Message, Provider, Request, Response,
 };
 
 pub use cognate_providers::{
-    anthropic, openai, retry, sse, AnthropicProvider, FallbackProvider, OpenAiProvider,
-    RetryConfig,
+    anthropic, openai, retry, sse, AnthropicProvider, FallbackProvider, OpenAiProvider, RetryConfig,
 };
 
 pub use cognate_tools::{Tool, ToolExecutor};
@@ -42,23 +28,23 @@ pub use cognate_prompts::Prompt;
 pub use cognate_prompts_derive::Prompt as DerivePromptMacro;
 
 #[cfg(feature = "rag")]
-pub use cognate_rag::{Document, InMemoryVectorStore, VectorStore};
+pub use cognate_rag::{Document, MemoryVectorStore, VectorStore};
 
 #[cfg(feature = "axum")]
 pub use cognate_axum;
 
 // Re-export derive macros for convenience
-pub use cognate_tools_derive;
 pub use cognate_prompts_derive;
+pub use cognate_tools_derive;
 
 /// Prelude module for convenient imports
 pub mod prelude {
-    pub use crate::{Error, Layer, Message, Provider, Request, Response};
     pub use crate::{AnthropicProvider, FallbackProvider, OpenAiProvider, RetryConfig};
+    pub use crate::{Error, Layer, Message, Provider, Request, Response};
     pub use crate::{Tool, ToolExecutor};
 
     #[cfg(feature = "rag")]
-    pub use crate::{Document, InMemoryVectorStore, VectorStore};
+    pub use crate::{Document, MemoryVectorStore, VectorStore};
 }
 
 pub mod providers {
@@ -75,4 +61,3 @@ pub mod prompts {
     //! Prompt templating
     pub use cognate_prompts::*;
 }
-

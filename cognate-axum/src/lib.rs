@@ -78,10 +78,7 @@ where
 {
     type Rejection = Infallible;
 
-    async fn from_request_parts(
-        _parts: &mut Parts,
-        state: &S,
-    ) -> Result<Self, Infallible> {
+    async fn from_request_parts(_parts: &mut Parts, state: &S) -> Result<Self, Infallible> {
         Ok(CognateProvider(Arc::<dyn Provider>::from_ref(state)))
     }
 }
@@ -205,7 +202,10 @@ struct UsageProvider {
 
 #[async_trait::async_trait]
 impl Provider for UsageProvider {
-    async fn complete(&self, req: cognate_core::Request) -> cognate_core::Result<cognate_core::Response> {
+    async fn complete(
+        &self,
+        req: cognate_core::Request,
+    ) -> cognate_core::Result<cognate_core::Response> {
         let response = self.inner.complete(req).await?;
         if let Some(usage) = &response.usage {
             self.handle

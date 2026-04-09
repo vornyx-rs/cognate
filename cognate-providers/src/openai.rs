@@ -5,7 +5,7 @@
 
 use async_trait::async_trait;
 use cognate_core::{
-    Chunk, Choice, Delta, EmbeddingProvider, Message, Provider, ProviderConfig, Request, Response,
+    Choice, Chunk, Delta, EmbeddingProvider, Message, Provider, ProviderConfig, Request, Response,
     Role, ToolCall, ToolCallFunction,
 };
 use futures::stream::{BoxStream, StreamExt, TryStreamExt};
@@ -103,7 +103,10 @@ impl OpenAiProvider {
         if status == 429 {
             cognate_core::Error::RateLimit { retry_after: 60 }
         } else {
-            cognate_core::Error::Api { status, message: body }
+            cognate_core::Error::Api {
+                status,
+                message: body,
+            }
         }
     }
 }
@@ -140,7 +143,10 @@ impl Provider for OpenAiProvider {
         .await
     }
 
-    async fn stream(&self, req: Request) -> cognate_core::Result<BoxStream<'static, cognate_core::Result<Chunk>>> {
+    async fn stream(
+        &self,
+        req: Request,
+    ) -> cognate_core::Result<BoxStream<'static, cognate_core::Result<Chunk>>> {
         with_retry(&self.retry_config, || async {
             if let Some(ref limiter) = self.rate_limiter {
                 limiter.acquire(1.0).await;

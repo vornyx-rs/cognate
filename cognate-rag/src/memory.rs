@@ -104,17 +104,14 @@ mod tests {
         let store = MemoryVectorStore::new();
         store
             .add_documents(vec![
-                doc("1", "close",  vec![1.0, 0.0, 0.0]),
-                doc("2", "far",    vec![0.0, 1.0, 0.0]),
+                doc("1", "close", vec![1.0, 0.0, 0.0]),
+                doc("2", "far", vec![0.0, 1.0, 0.0]),
                 doc("3", "medium", vec![0.7, 0.7, 0.0]),
             ])
             .await
             .unwrap();
 
-        let results = store
-            .search(vec![1.0, 0.0, 0.0], 1)
-            .await
-            .unwrap();
+        let results = store.search(vec![1.0, 0.0, 0.0], 1).await.unwrap();
 
         assert_eq!(results.len(), 1);
         assert_eq!(results[0].content, "close");

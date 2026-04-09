@@ -17,8 +17,8 @@
 //! }
 //! ```
 
+use crate::{Choice, Chunk, Delta, Message, Provider, Request, Response, Result};
 use async_trait::async_trait;
-use crate::{Chunk, Choice, Delta, Message, Provider, Request, Response, Result};
 use futures::stream::{self, BoxStream, StreamExt};
 use std::sync::{Arc, Mutex};
 

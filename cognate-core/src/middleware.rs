@@ -14,8 +14,8 @@
 //! }
 //! ```
 
+use crate::{Chunk, Provider, Request, Response, Result};
 use async_trait::async_trait;
-use crate::{Provider, Request, Response, Result, Chunk};
 use futures::stream::BoxStream;
 use std::sync::Arc;
 

@@ -72,10 +72,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let request = Request::new()
         .with_model("gpt-4o-mini")
-        .with_messages(vec![
-            Message::system(system_prompt),
-            Message::user(query),
-        ]);
+        .with_messages(vec![Message::system(system_prompt), Message::user(query)]);
 
     // ── 5. Generate the answer ─────────────────────────────────────────────
     println!("Generating answer …\n");
