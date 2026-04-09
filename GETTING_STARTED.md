@@ -21,6 +21,14 @@ Edit `Cargo.toml`:
 
 ```toml
 [dependencies]
+cognate-llm = "0.1"
+tokio = { version = "1", features = ["full"] }
+```
+
+Or for more granular control, add individual crates:
+
+```toml
+[dependencies]
 cognate-core = "0.1"
 cognate-providers = "0.1"
 tokio = { version = "1", features = ["full"] }
@@ -311,6 +319,7 @@ cargo run --example chatgpt_clone -p cognate-axum
 
 ## Support
 
-- Documentation: https://docs.rs/cognate-core
-- Issues: https://github.com/YOUR_ORG/cognate/issues
-- Discussions: https://github.com/YOUR_ORG/cognate/discussions
+- **Documentation**: [docs.rs/cognate-llm](https://docs.rs/cognate-llm/)
+- **Issues**: [github.com/vornyx-rs/cognate/issues](https://github.com/vornyx-rs/cognate/issues)
+- **Discussions**: [github.com/vornyx-rs/cognate/discussions](https://github.com/vornyx-rs/cognate/discussions)
+- **Author**: [@vornyx-rs](https://github.com/vornyx-rs)

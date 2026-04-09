@@ -15,7 +15,7 @@ Cognate maintains a welcoming, inclusive community. We expect contributors to:
 
 ### Reporting Issues
 
-Found a bug? Have a feature idea? Open an issue on GitHub:
+Found a bug? Have a feature idea? Open an issue on [GitHub](https://github.com/vornyx-rs/cognate/issues):
 
 - Search existing issues first (to avoid duplicates)
 - Use a clear, descriptive title
@@ -56,7 +56,7 @@ Code contributions are welcome for:
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_ORG/cognate
+git clone https://github.com/vornyx-rs/cognate
 cd cognate
 ```
 

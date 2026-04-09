@@ -18,11 +18,13 @@ Cognate provides production-grade abstractions for building LLM-powered applicat
 
 ## Quick Links
 
-- Documentation: https://docs.rs/cognate-core
-- Examples: See [examples/](cognate-providers/examples)
-- Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Architecture: [ARCHITECTURE.md](ARCHITECTURE.md)
-- Getting Started: [GETTING_STARTED.md](GETTING_STARTED.md)
+- **Main Crate**: https://crates.io/crates/cognate-llm
+- **Documentation**: https://docs.rs/cognate-llm/
+- **Repository**: https://github.com/vornyx-rs/cognate
+- **Examples**: See [examples/](cognate-providers/examples)
+- **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md)
+- **Architecture**: [ARCHITECTURE.md](ARCHITECTURE.md)
+- **Getting Started**: [GETTING_STARTED.md](GETTING_STARTED.md)
 
 ## Why Cognate?
 
@@ -275,7 +277,7 @@ Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 Development setup:
 
 ```bash
-git clone https://github.com/YOUR_ORG/cognate
+git clone https://github.com/vornyx-rs/cognate
 cd cognate
 cargo test --workspace
 cargo fmt
@@ -284,9 +286,10 @@ cargo clippy --workspace
 
 ## Support
 
-- Documentation: https://docs.rs/cognate-core
-- Examples: See [examples/](cognate-providers/examples)
-- Issues: https://github.com/YOUR_ORG/cognate/issues
+- **Documentation**: [docs.rs/cognate-llm](https://docs.rs/cognate-llm/)
+- **Examples**: See [examples/](cognate-providers/examples)
+- **Issues**: [github.com/vornyx-rs/cognate/issues](https://github.com/vornyx-rs/cognate/issues)
+- **Author**: [@vornyx-rs](https://github.com/vornyx-rs)
 
 ## Roadmap
 
